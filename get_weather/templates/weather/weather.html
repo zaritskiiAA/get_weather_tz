@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% block title %}
+  Погода
+{% endblock %}
+{% block content %}
+<div class="content-container">
+    <div class="title-container">
+        <h2 class="text-center mb-4">Погода в городе</h2>
+    </div>
+    <div class="form-container">
+        <form method="post" class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <div class="input-group">
+                <input class="form-control mr-sm-2" id="cities" type="search" name='city' placeholder="Введите название города">
+                <span class="input-group-btn">
+                    <button class="btn-outline-success.my-2 my-sm-0" type="submit">Поиск</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

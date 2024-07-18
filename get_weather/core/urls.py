@@ -16,8 +16,32 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.urls import re_path
+from django.conf.urls.static import static
+from django.conf import settings
+from django.views.generic import TemplateView
+
+from .swagger import schema_view
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include('api.urls')),
+    path("weather/", include('weather.urls')),
+    path("users/", include('users.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Swagger
+urlpatterns += [
+    path(
+        "swagger-ui/",
+        TemplateView.as_view(template_name="swagger-ui.html"),
+        name="swagger-ui",
+    ),
+    re_path(
+        r"^swagger(?P<format>\.json|\.yaml)$",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
 ]

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'get_weather' %}">Главная</a></li>
+                <li><a href="{% url 'last_query' %}">Посмотреть последний запрос</a></li>
+                <li><a href="{% url 'logout' %}">Выйти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- взято с https://youtu.be/aHzN92LqWf0?si=fKsYQRc9RGv_kBrP -->
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script> 
+    <script>
+        $( function() {
+
+        $( "#cities" ).autocomplete({
+            source: "{% url 'auto_complete' %}",
+        });
+        } );
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    Температура в течении дня.
+    <style>
+        .dataframe {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .dataframe th, .dataframe td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .dataframe tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+{%endblock%}
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Время</th>
+            <th>Температура</th>
+            <th>Дождь</th>
+            <th>Ливень</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for data in hourly %}
+        <tr>
+            <td>{{ data.0 }}</td>
+            <td>{{ data.1|floatformat:2 }} °C </td>
+            <td>{{ data.2 }}</td>
+            <td>{{ data.3 }}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    Температура
+{%endblock%}
+{% block content %}
+    <h3> Cейчас: {{ current }}°C </h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Мин</th>
+                <th>Макс</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for date, temps in daily.items %}
+                <tr>
+                    <td>{{ date }}</td>
+                    <td>{{ temps.0|floatformat:2 }} °C</td>
+                    <td>{{ temps.1|floatformat:2 }} °C</td>
+                    <td>
+                        <form method="post" action="{% url 'detail_weather' date=date%}">
+                            {% csrf_token %}
+                            <input type="hidden" name="hourly" value="{{ hourly }}">
+                            <button type="submit">Подробнее</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%endblock%}
