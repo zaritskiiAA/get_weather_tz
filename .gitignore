@@ -1,2 +1,12 @@
 # venv dirs
 venv/
+
+# cache dirs
+__pycache__/
+
+# sql modules
+*.sqlite3
+*.sqlite
+
+# env 
+.env
